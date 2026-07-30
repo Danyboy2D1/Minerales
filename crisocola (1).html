@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crisocola - Guía de Minerales y Geología</title>
+    <style>
+
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.75);
+    --border-color: rgba(255, 255, 255, 0.12);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-bottom: 50px;
+    background-image: 
+        radial-gradient(at 20% 20%, rgba(30, 58, 138, 0.25) 0px, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(88, 28, 135, 0.25) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo span {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* HERO SECTION - Single column full width without images/SVGs */
+.mineral-hero {
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+.hero-text .subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+}
+
+.formula-badge {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 1.2rem;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.spec-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.3rem;
+    backdrop-filter: blur(8px);
+}
+
+.spec-title {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.spec-value {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.mohs-container {
+    margin-top: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mohs-bar {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.info-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(8px);
+}
+
+.info-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+}
+
+.info-content {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+}
+
+.info-content p {
+    margin-bottom: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+}
+
+        .mohs-bar {
+            width: 30%;
+            background: linear-gradient(90deg, #06b6d4, #22d3ee);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="crisocola.html" class="logo">
+                💎 <span>Catálogo Mineralógico</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="epidota.html">Epidota</a></li>
+                <li><a href="crisocola.html" class="active">Crisocola</a></li>
+                <li><a href="cuarzo_rosado.html">Cuarzo Rosado</a></li>
+                <li><a href="amatista.html">Amatista</a></li>
+                <li><a href="fluorita.html">Fluorita</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section (Sin imágenes ni SVGs) -->
+        <section class="mineral-hero" style="background: linear-gradient(135deg, #0f3843 0%, #134e5e 50%, #166534 100%);">
+            <div class="hero-text">
+                <div class="formula-badge">Cu<sub>2-x</sub>Al<sub>x</sub>(H<sub>2-x</sub>Si<sub>2</sub>O<sub>5</sub>)(OH)<sub>4</sub>·nH<sub>2</sub>O</div>
+                <h1>Crisocola</h1>
+                <p class="subtitle">Filosilicato secundario de cobre con tonos azul turquesa</p>
+                <p><strong>Clase Mineral:</strong> Silicatos (Filosilicatos)</p>
+            </div>
+        </section>
+
+        <!-- Technical Specifications Grid -->
+        <section class="specs-grid">
+            <div class="spec-card">
+                <div class="spec-title">🧪 Composición Química</div>
+                <div class="spec-value" style="font-size: 1rem;">Cu<sub>2-x</sub>Al<sub>x</sub>(H<sub>2-x</sub>Si<sub>2</sub>O<sub>5</sub>)(OH)<sub>4</sub>·nH<sub>2</sub>O</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">Silicatos (Filosilicatos)</div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">🔨 Dureza (Mohs)</div>
+                <div class="spec-value">2.5 - 3.5 (Escala de Mohs)</div>
+                <div class="mohs-container">
+                    <div class="mohs-bar"></div>
+                </div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">✨ Brillo / Lustre</div>
+                <div class="spec-value">Vítreo, ceroso, graso a terroso mate</div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">✏️ Raya</div>
+                <div class="spec-value">Verde azulada pálida a blanca</div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">📐 Sistema Cristalino</div>
+                <div class="spec-value">Ortorrómbico / Amorfo (Gelemia)</div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">🎨 Coloración</div>
+                <div class="spec-value" style="font-size: 0.95rem;">Azul turquesa, cian, verde azulado a verde esmeralda</div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">💎 Exfoliación</div>
+                <div class="spec-value" style="font-size: 0.95rem;">Ninguna (fractura concoidea a desigual)</div>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-title">⚖️ Densidad</div>
+                <div class="spec-value">2.0 - 2.4 g/cm³</div>
+            </div>
+        </section>
+
+        <!-- Detailed Description -->
+        <section class="info-section">
+            <h2>📖 Descripción e Información General</h2>
+            <div class="info-content">
+                <p>La <strong>crisocola</strong> es un mineral secundario de cobre de fascinantes tonos azul turquesa y verde. Se origina en las zonas superiores supergénicas (zonas de oxidación) de los yacimientos de cobre por la reacción de soluciones ricas en sílice sobre minerales de cobre primarios como la calcopirita o malaquita.</p><p>Su nombre deriva de los términos griegos <em>chrysos</em> ('oro') y <em>kolla</em> ('cola' o 'pegamento'), haciendo referencia a su uso antiguo como fundente para soldar oro. Rara vez forma cristales individuales definidos; suele presentarse en agregados botrioidales, masas cerosas o costras incrustantes.</p>
+            </div>
+        </section>
+
+        <!-- Deposits and Uses Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <section class="info-section">
+                <h2>🌍 Yacimientos Principales</h2>
+                <div class="info-content">
+                    <p>Chile (Atacama), Perú (Ica, Moquegua), República Democrática del Congo, EE.UU. (Arizona, Nuevo México), Rusia y Australia.</p>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <h2>⚒️ Usos y Aplicaciones</h2>
+                <div class="info-content">
+                    <p>Menor de cobre en yacimientos masivos, muy apreciada como piedra ornamental, gema en joyería semipreciosa (especialmente cuando se silicifica como 'cuarzo crisocola') y pieza de colección.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="info-section">
+            <h2>💡 Datos Curiosos y Geología</h2>
+            <div class="info-content">
+                <p>A menudo se encuentra asociada de forma directa con la malaquita, la azurita, la cuprita y el cuarzo, creando espectaculares patrones multicolores conocidos como 'Eilat stone'.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 Catálogo de Mineralogía Científica — Epidota, Crisocola, Cuarzo Rosado, Amatista y Fluorita</p>
+    </footer>
+
+</body>
+</html>
