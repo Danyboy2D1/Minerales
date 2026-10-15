@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuerzas en el plano: estática y dinámica de un puente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#14213d;--navy2:#1f3157;--gold:#c9a227;--gold-l:#f3e7bd;--paper:#f7f5ef;--ink:#1d2433;--mute:#5b6477;--line:#d9d4c3;--blue:#e5ecf8;--amber:#fbf0d2;--serif:'Source Serif 4',Georgia,serif;--sans:'Libre Franklin',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans)}
+header{background:var(--navy);color:#fff;padding:44px 24px 36px;border-bottom:4px solid var(--gold);text-align:center}
+header h1{font:700 clamp(28px,5vw,44px)/1.15 var(--serif);margin:0 0 10px;color:var(--gold-l)}
+header p{margin:0;color:#c9d2e6;font-size:15px}
+main{max-width:1040px;margin:0 auto;padding:32px 20px 56px}
+h2{font:600 26px/1.25 var(--serif);color:var(--navy);margin:44px 0 6px}
+.sub{color:var(--mute);margin:0 0 20px;max-width:62ch}
+.comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.comp div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.comp b{display:block;font-family:var(--serif);font-size:19px;color:var(--navy)}
+.comp span{font-size:14px;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:22px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card h3{margin:0;padding:18px 22px;font:700 24px/1.2 var(--serif)}
+.card h3 small{display:block;font:500 13px var(--sans);margin-top:3px}
+.est h3{background:var(--blue);color:#17356b}
+.din h3{background:var(--amber);color:#6b4a00}
+.body{padding:20px 22px 24px}
+.body p{margin:0 0 14px;font-size:15px}
+.eq{background:var(--paper);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 16px;font:600 19px/1.7 var(--serif);color:var(--navy)}
+.eq small{display:block;font:400 12.5px var(--sans);color:var(--mute)}
+.body h4{margin:18px 0 6px;font:600 15px var(--sans);color:var(--navy)}
+.body ul{margin:0 0 6px;padding-left:20px;font-size:14.5px}
+.body li{margin-bottom:5px}
+.ex{background:var(--navy);color:#e9edf7;border-radius:10px;padding:14px 16px;font-size:14px;margin-top:16px}
+.ex b{color:var(--gold-l)}
+.calc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-bottom:12px}
+.ctl label{font-size:14px;color:var(--mute);display:flex;justify-content:space-between}
+.ctl label b{color:var(--navy)}
+input[type=range]{width:100%;accent-color:var(--navy)}
+svg{width:100%;height:auto;display:block}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px}
+.res div{background:var(--paper);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--mute)}
+.res b{display:block;font:700 22px var(--serif);color:var(--navy)}
+.res .chk b{color:#2f6b3a}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;background:#fff;border:1px solid var(--line);font-size:14.5px}
+th,td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--navy);color:var(--gold-l);font-weight:600}
+td:first-child{font-weight:600;color:var(--navy);width:22%}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:0 20px 36px}
+</style>
+</head>
+<body>
+<header>
+<h1>Fuerzas en el plano en un puente</h1>
+<p>Estática y dinámica · Ingeniería de Minas · 2026</p>
+</header>
+<main>
+
+<h2>Fuerzas en el plano</h2>
+<p class="sub">Un puente de celosía se analiza en dos dimensiones. Cada fuerza F con ángulo θ respecto al eje x se descompone en una componente horizontal y otra vertical.</p>
+<div class="comp">
+<div><b>Fx = F·cos θ</b><span>Componente horizontal (eje x)</span></div>
+<div><b>Fy = F·sen θ</b><span>Componente vertical (eje y)</span></div>
+<div><b>M = F · d</b><span>Momento: fuerza por distancia perpendicular al punto</span></div>
+</div>
+
+<h2>Los dos cuadros</h2>
+<p class="sub">Convención usada: x positivo hacia la derecha, y positivo hacia arriba, momento positivo en sentido antihorario.</p>
+<div class="grid">
+
+<section class="card est">
+<h3>Estática<small>El puente en reposo y en equilibrio</small></h3>
+<div class="body">
+<p>Estudia las fuerzas sobre el puente cuando no se mueve ni acelera. Todas las fuerzas externas (cargas y reacciones) se compensan entre sí.</p>
+<div class="eq">ΣFx = 0 &nbsp; ΣFy = 0 &nbsp; ΣM = 0<small>Tres ecuaciones de equilibrio en el plano, por tanto tres incógnitas como máximo.</small></div>
+<h4>Apoyos del puente</h4>
+<ul>
+<li><b>Apoyo fijo:</b> impide el desplazamiento horizontal y el vertical. Reacciones Rx y Ry.</li>
+<li><b>Apoyo móvil:</b> impide solo el desplazamiento vertical y permite dilatación térmica. Reacción Ry.</li>
+</ul>
+<h4>Cargas</h4>
+<ul>
+<li><b>Muerta:</b> peso propio del puente.</li>
+<li><b>Viva:</b> vehículos y personas que lo utilizan.</li>
+</ul>
+<h4>Esfuerzos en las barras de la celosía</h4>
+<ul>
+<li><b>Tracción:</b> la barra se estira.</li>
+<li><b>Compresión:</b> la barra se acorta.</li>
+<li>Se analizan como fuerzas axiales porque las cargas actúan en los nudos.</li>
+</ul>
+<div class="ex"><b>Caso base:</b> carga puntual P en el centro de un puente simplemente apoyado. Por simetría R₁ = R₂ = P/2. Con P = 100 kN, cada apoyo recibe 50 kN. Si no hay fuerzas horizontales, Rx = 0.</div>
+</div>
+</section>
+
+<section class="card din">
+<h3>Dinámica<small>El puente bajo cargas que cambian o se mueven</small></h3>
+<div class="body">
+<p>Estudia el comportamiento del puente cuando las cargas varían en el tiempo o generan movimiento y vibraciones. La fuerza neta ya no es cero.</p>
+<div class="eq">ΣFx = m·aₓ &nbsp; ΣFy = m·a<sub style="font-size:13px">y</sub><small>Segunda ley de Newton aplicada a cada eje del plano.</small></div>
+<h4>Fuentes de carga dinámica</h4>
+<ul>
+<li><b>Tránsito de vehículos:</b> la carga se desplaza y su posición cambia las reacciones en cada instante.</li>
+<li><b>Frenado y arranque:</b> generan fuerzas horizontales que pasan a los apoyos.</li>
+<li><b>Vibraciones:</b> oscilaciones por el paso de cargas o el viento.</li>
+<li><b>Sismos:</b> aceleraciones del terreno que se transmiten a la estructura.</li>
+</ul>
+<h4>Por qué importa</h4>
+<ul>
+<li>Una carga en movimiento puede producir esfuerzos mayores que la misma carga en reposo.</li>
+<li>Si la frecuencia de la carga coincide con la natural del puente, aparece resonancia y la vibración se amplifica.</li>
+</ul>
+<h4>Uso en minería</h4>
+<ul>
+<li>Camiones de acarreo sobre puentes de acceso a mina.</li>
+<li>Plataformas y soportes de instalaciones industriales.</li>
+</ul>
+<div class="ex"><b>Caso base:</b> un camión de 20 t (20 000 kg) frena con a = 2 m/s². La fuerza horizontal es F = m·a = 20 000 × 2 = 40 000 N = 40 kN, y la absorbe el apoyo fijo.</div>
+</div>
+</section>
+
+</div>
+
+<h2>Calculadora de reacciones</h2>
+<p class="sub">Puente simplemente apoyado de longitud L = 20 m con una carga puntual vertical. Mueve la carga y mira cómo se reparten las reacciones.</p>
+<div class="calc">
+<div class="ctl">
+<div><label>Carga P <b id="Pv">100 kN</b></label><input id="P" type="range" min="10" max="200" step="5" value="100"></div>
+<div><label>Posición a desde el apoyo fijo <b id="av">10 m</b></label><input id="a" type="range" min="0" max="20" step="0.5" value="10"></div>
+</div>
+<svg viewBox="0 0 640 210" role="img" aria-label="Viga con carga puntual y reacciones en los apoyos">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#14213d"/></marker><marker id="ag" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#a8821a"/></marker></defs>
+<rect x="60" y="110" width="520" height="12" fill="#14213d"/>
+<polygon points="60,122 44,150 76,150" fill="#c9a227"/>
+<circle cx="580" cy="135" r="12" fill="#c9a227"/>
+<line x1="560" y1="150" x2="600" y2="150" stroke="#14213d" stroke-width="3"/>
+<line x1="30" y1="150" x2="90" y2="150" stroke="#14213d" stroke-width="3"/>
+<line id="ld" x1="320" y1="30" x2="320" y2="106" stroke="#a8821a" stroke-width="4" marker-end="url(#ag)"/>
+<text id="lt" x="320" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="#a8821a">P</text>
+<line id="r1" x1="60" y1="200" x2="60" y2="154" stroke="#14213d" stroke-width="4" marker-end="url(#ar)"/>
+<text id="r1t" x="78" y="190" font-size="14" font-weight="600" fill="#14213d">R₁</text>
+<line id="r2" x1="580" y1="200" x2="580" y2="154" stroke="#14213d" stroke-width="4" marker-end="url(#ar)"/>
+<text id="r2t" x="518" y="190" font-size="14" font-weight="600" fill="#14213d">R₂</text>
+</svg>
+<div class="res">
+<div>R₁ (apoyo fijo, vertical)<b id="R1">50.0 kN</b></div>
+<div>R₂ (apoyo móvil)<b id="R2">50.0 kN</b></div>
+<div>Rx (apoyo fijo)<b>0 kN</b></div>
+<div class="chk">Comprobación ΣFy<b id="chk">0.0 kN</b></div>
+</div>
+<p class="sub" style="margin:14px 0 0;font-size:13.5px">Fórmulas: R₂ = P·a / L (de ΣM respecto al apoyo fijo) y R₁ = P − R₂ (de ΣFy).</p>
+</div>
+
+<h2>Estática frente a dinámica</h2>
+<div class="tw"><table>
+<thead><tr><th></th><th>Estática</th><th>Dinámica</th></tr></thead>
+<tbody>
+<tr><td>Estado del puente</td><td>Reposo, equilibrio</td><td>Movimiento, vibración</td></tr>
+<tr><td>Ecuaciones</td><td>ΣFx = 0, ΣFy = 0, ΣM = 0</td><td>ΣFx = m·aₓ, ΣFy = m·a<sub>y</sub></td></tr>
+<tr><td>Qué se calcula</td><td>Reacciones en apoyos y fuerza en cada barra</td><td>Fuerzas por aceleración y respuesta a cargas variables</td></tr>
+<tr><td>Cargas típicas</td><td>Peso propio y carga viva detenida</td><td>Vehículos en marcha, frenado, viento, sismos</td></tr>
+</tbody></table></div>
+
+</main>
+<footer>Resumen basado en la maqueta «Análisis de fuerzas en un puente». Valores de los casos base y de la calculadora son ilustrativos.</footer>
+
+<script>
+var P=document.getElementById('P'),A=document.getElementById('a');
+function f(n){return n.toFixed(1)}
+function upd(){
+var p=+P.value,a=+A.value,L=20;
+var r2=p*a/L,r1=p-r2;
+document.getElementById('Pv').textContent=p+' kN';
+document.getElementById('av').textContent=a+' m';
+document.getElementById('R1').textContent=f(r1)+' kN';
+document.getElementById('R2').textContent=f(r2)+' kN';
+document.getElementById('chk').textContent=f(r1+r2-p)+' kN';
+var x=60+520*a/L;
+var ld=document.getElementById('ld'),lt=document.getElementById('lt');
+ld.setAttribute('x1',x);ld.setAttribute('x2',x);lt.setAttribute('x',x);
+lt.textContent='P = '+p+' kN';
+var s=46/200*1.0;
+var h1=Math.max(r1/p*46+2,2),h2=Math.max(r2/p*46+2,2);
+var e1=document.getElementById('r1'),e2=document.getElementById('r2');
+e1.setAttribute('y1',154+h1+8);e2.setAttribute('y1',154+h2+8);
+e1.style.opacity=r1<0.05?0.15:1;e2.style.opacity=r2<0.05?0.15:1;
+}
+P.oninput=upd;A.oninput=upd;upd();
+</script>
+</body>
+</html>
